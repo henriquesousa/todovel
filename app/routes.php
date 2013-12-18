@@ -9,8 +9,8 @@ Route::group(array('before' => 'auth'), function()
 	Route::any('tasks', 'TaskController@listar');
 	
 	/*    adding tasks routes    */
-	Route::get('task/add/{lista_id}', 'TaskController@getAdd');
-	Route::post('task/add/{lista_id}', 'TaskController@postAdd');
+	Route::get('task/add/{lista_id?}', 'TaskController@getAdd');
+	Route::post('task/add/{lista_id?}', 'TaskController@postAdd');
 	
 	/*    checking tasks    */
 	Route::post('task/check', 'TaskController@check');
@@ -41,17 +41,17 @@ Route::post('login', array('before' => 'csrf', function() {
 		return Redirect::to('login')->withErrors($validacao);
 	}
 	
-	//tenta logar o usuário
+	//tenta logar o usuï¿½rio
 	if (Auth::attempt( array('email' => Input::get('email'), 'password' => Input::get('senha') ) ) ) {
 		return Redirect::to('/');
 	}
 	else {
-		return Redirect::to('login')->withErrors('Usuário ou Senha Inválido');
+		return Redirect::to('login')->withErrors('Usuï¿½rio ou Senha Invï¿½lido');
 	}
 }));
 
 
-/*    cadastro de novos usuários    */
+/*    cadastro de novos usuï¿½rios    */
 Route::group(["before"=>'guest'], function() {
 	Route::get('cadastro', 'UserController@form');
 	Route::post('cadastro',  ['before' => 'csrf', 'uses' => 'UserController@cadastro']);
@@ -60,7 +60,7 @@ Route::group(["before"=>'guest'], function() {
 
 
 
-/*    página inicial    */
+/*    pï¿½gina inicial    */
 Route::any('/', ["as" => "home",
 		 function() {
 			if (Auth::guest())
